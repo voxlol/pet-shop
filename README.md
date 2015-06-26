@@ -49,8 +49,8 @@ client/
 │── main.js                    - Where all the JavaScript starts
 └── main.scss                  - Where all the Sass starts
 
-ext/                       - Small extensions to the JavaScript language. Get familiar
-│                            with these so you can add them to your toolbelt!
+ext/                           - Small extensions to the JavaScript language. Get familiar
+│                                with these so you can add them to your toolbelt!
 │── arrays.js
 │── functions.js
 └── globals.js
