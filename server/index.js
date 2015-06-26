@@ -9,15 +9,18 @@ app.get('/scripts/vendor-bundle.js', browserify(shared))
 app.get('/scripts/app-bundle.js', browserify('./client/main.js', { external: shared }))
 
 // Sass
-var sassMiddleware = require('node-sass-middleware')
-app.use(sassMiddleware({
-    /* Options */
-    src: Path.join(__dirname, '../client'),
-    dest: Path.join(__dirname, '../client/public'),
-    debug: true,
-    outputStyle: 'compressed',
-    prefix:  '/styles'  // Where prefix is at <link rel="stylesheets" href="styles/my-style.css"/>
-}));
+var sass = require('node-sass')
+app.get('/styles/*', function(req, res) {
+  var filePath = req.params[0]
+  sass.render({
+    file: Path.join(Path.join(__dirname, '../client'), filePath.replace(/\.css$/, '.scss') )
+  }, function(err, result) {
+    if (err) throw err;
+
+    res.set('Content-Type', 'text/css')
+    res.send(result.css)
+  })
+})
 
 // Non-js static files
 app.use(express.static('client/public'))
