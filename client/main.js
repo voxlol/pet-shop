@@ -6,3 +6,4 @@ var m = require('mithril')
 var PetShopWindow = require('./components/PetShopWindow')
 
 m.mount(document.getElementById('app'), PetShopWindow)
+console.log(PetShopWindow.controller)
