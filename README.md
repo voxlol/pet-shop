@@ -34,20 +34,29 @@ Mithril views are **reactive**, which means when data changes, the views reflect
 The `client` folder holds most of the application code, and includes the following files:
 
 ```
-client
-├── components                 - Each components will have its own folder
-│   ├── pet-shop               - A folder containing the PetShop component
-│       ├── pet-shop.js        - The JavaScript code for this component
-│       └── pet-shop.css       - The CSS code for this specific component
+client/
+├── components
+│   ├── PetShopWindow.js       - The JavaScript code for this component
+│   └── PetShopWindow.scss     - The SCSS code for this specific component
 │
-├── ext                        - Small extensions to the JavaScript language. Get familiar
-│   │                            with these so you can add them to your toolbelt!
-│   │── arrays.js
-│   │── functions.js
-│   └── globals.js
+├── models
+│   │
+│   └── shop.js                - The model to handle Pet Shop data
 │
-└── index.html                 - main html file
+├── public
+│   └── index.html             - main html file
+│
+│── main.js                    - Where all the JavaScript starts
+└── main.scss                  - Where all the Sass starts
+
+ext/                       - Small extensions to the JavaScript language. Get familiar
+│                            with these so you can add them to your toolbelt!
+│── arrays.js
+│── functions.js
+└── globals.js
 ```
+
+To get started, run `node server/index.js`
 
 # Assignment
 
