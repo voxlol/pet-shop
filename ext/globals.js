@@ -8,21 +8,39 @@ window.getProp = function (propName) {
   return function (obj) { return obj[propName] }
 }
 
-// Merges several objects together.
-// Example use:
 //
-//   var alice  = { name: 'alice', hobby: 'reading' }
-//   var updates = { hobby: 'programming' }
-//   merge(alice, aliceFromServer)
-//   alice //=> { name: 'alice', hobby: 'programming' }
+// Object.assign
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
 //
-window.merge = function (target) {
-  var sources = Array.prototype.slice.call(arguments, 1)
-  for (var i=0; i < sources.length; i++) {
-    var source = sources[i]
-    for (var prop in source) {
-      if (source.hasOwnProperty(prop)) target[prop] = source[prop]
+if (!Object.assign) {
+  Object.defineProperty(Object, 'assign', {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value: function(target) {
+      'use strict';
+      if (target === undefined || target === null) {
+        throw new TypeError('Cannot convert first argument to object');
+      }
+
+      var to = Object(target);
+      for (var i = 1; i < arguments.length; i++) {
+        var nextSource = arguments[i];
+        if (nextSource === undefined || nextSource === null) {
+          continue;
+        }
+        nextSource = Object(nextSource);
+
+        var keysArray = Object.keys(Object(nextSource));
+        for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+          var nextKey = keysArray[nextIndex];
+          var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+          if (desc !== undefined && desc.enumerable) {
+            to[nextKey] = nextSource[nextKey];
+          }
+        }
+      }
+      return to;
     }
-  }
-  return target
+  });
 }
