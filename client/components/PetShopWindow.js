@@ -15,16 +15,17 @@ PetShopWindow.controller = function () {
 PetShopWindow.view = function (ctrl) {
   return m('.pet-shop', [
     m('h1', "Welcome to " + ctrl.shop().name),
-    ctrl.pets().map(petView)
-  ])
 
-  function petView (pet){
-    return m('.pet', [
-      m('p', 'Name : ' + pet.name),
-      m('p', 'Species : ' + pet.species),
-      m('img', {src: pet.imageUrl}),
-      m('p', 'Likes : ', pet.likes.length)
-    ])
-  }
+    //partial application so petView has access to controller
+    ctrl.pets().map( petView.bind(null, ctrl) )
+  ])
 }
 
+function petView (ctrl, pet){
+  return m('.pet', [
+    m('p', 'Name : ' + pet.name),
+    m('p', 'Species : ' + pet.species),
+    m('img', {src: pet.imageUrl}),
+    m('p', 'Likes : ', pet.likes.length)
+  ])
+}

@@ -72,10 +72,10 @@ Before you start, poke around the API using Postman. DO NOT SKIP THIS STEP! To u
 
 For the basic requirements, you will only be working with pet shop `id=1`:
 
-- [ ] Show all pets that this shop houses. For each pet:
-  - [ ] Display the pet's name and species
-  - [ ] Display the pet's picture
-  - [ ] Display the number of votes this pet has received
+- [X] Show all pets that this shop houses. For each pet:
+  - [X] Display the pet's name and species
+  - [X] Display the pet's picture
+  - [X] Display the number of votes this pet has received
 - [ ] Implement sign up and sign in
 - [ ] For each pet, add a button that allows a signed-in user to like the pet
   - [ ] Do not show this button when a user is not signed in
