@@ -64,7 +64,7 @@ In this sprint you will be working with a public toy [REST API](https://www.yout
 
 WARNING: Always look at the **status code**, especially if you are getting a blank response. Some endpoints are protected behind authentication, so you will need to sign in first!
 
-The starting code provides a basic Mithril app with a single request to this API, and showing the result on the page. Don't forget to `bower install` !
+The starting code provides a basic Mithril app with a single request to this API, and showing the result on the page. Don't forget to `npm install` !
 
 Before you start, poke around the API using Postman. DO NOT SKIP THIS STEP! To use an API token, you will need to include it in the `POST` parameters; the correct key is `apiToken` (don't forget to set your `Content-Type`!)
 
