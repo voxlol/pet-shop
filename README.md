@@ -77,9 +77,9 @@ For the basic requirements, you will only be working with pet shop `id=1`:
   - [X] Display the pet's picture
   - [X] Display the number of votes this pet has received
 - [X] Implement sign up and sign in
-- [ ] For each pet, add a button that allows a signed-in user to like the pet
-  - [ ] Do not show this button when a user is not signed in
-  - [ ] Ping the server every 5 seconds to display any like count updates
+- [X] For each pet, add a button that allows a signed-in user to like the pet
+  - [X] Do not show this button when a user is not signed in
+  - [X] Ping the server every 5 seconds to display any like count updates
 
 ## Extra Credit:
 

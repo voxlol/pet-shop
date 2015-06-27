@@ -22,11 +22,12 @@ Shop.signIn = function(username, password){
     data: data,
     "content-type": "application/json",
     unwrapSuccess: function(response) {
-      console.log(response);
       console.log("it worked!");
+      return response;
+
     },
     unwrapError: function(response) {
-      console.log(response.error);
+      return response.error;
     }
   })
 }
@@ -43,11 +44,10 @@ Shop.signUp = function(username, password){
     data : data,
     "content-type": "application/json",
     unwrapSuccess: function(response) {
-      console.log(response);
-      console.log("it worked!");
+      return response;
     },
     unwrapError: function(response) {
-      console.log(response.error);
+      return response.error;
     }
   });
 }
