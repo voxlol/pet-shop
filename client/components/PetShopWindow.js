@@ -17,9 +17,6 @@ PetShopWindow.controller = function () {
   setInterval(function() {
     Shop.fetchPets()
     .then(ctrl.pets);
-    // console.log('hello there');
-    // console.log(Auth.isSignedIn());
-    // console.log(Auth.token());
   }, 5000);
 
   ctrl.like = function(e,pet){
@@ -28,43 +25,19 @@ PetShopWindow.controller = function () {
       apiToken : Auth.token()
     }
 
-    return m.request({
-      method: 'POST',
-      url: 'http://pet-shop.api.mks.io/shops/1/pets/' + pet.id + '/like',
-      data : data,
-      "content-type" : "application/json",
-      unwrapSuccess: function(response) {
-        return response;
-      },
-      unwrapError: function(response) {
-        return response.error;
-      }
-    });
+    Shop.like(pet.id, data);
   }
 }
 
 PetShopWindow.view = function (ctrl) {
-  // if (ctrl.isSignedIn() === false){
-  //   // return signedInView(ctrl)
-  // }else{
-  //   // return signedOutView(ctrl)
-  // }
 
   return m('.pet-shop', [
-
-    // m.component(AuthPanel),
-
     m('h1', "Welcome to " + ctrl.shop().name),
-    // m.component(AuthPanel),
-
     ctrl.pets().map( petView.bind(null, ctrl) )
   ])
 }
 
 function petView (ctrl, pet){
-  // check the isSignedIn property
-  // debugger;
-  // console.log("Signed in ?", Auth.isSignedIn())
   if (Auth.isSignedIn()) {
     var likedButton = m('button', {type:'submit', onclick: function(e){
       ctrl.like(e,pet)
@@ -76,6 +49,6 @@ function petView (ctrl, pet){
     m('p', 'Species : ' + pet.species),
     m('img', {src: pet.imageUrl}),
     likedButton,
-    m('p', 'Likes : ', pet.likes.length)
+    m('span', 'Likes : ', pet.likes.length)
   ])
 }

@@ -15,10 +15,12 @@ Auth.signIn = function(username, password){
     data: data,
     "content-type": "application/json"
   }).then(function(response){
-    Auth.isSignedIn(true);
-    Auth.token(response.apiToken)
+    // console.log(response);
+      Auth.isSignedIn(true);
+      Auth.token(response.apiToken)
+      Auth.username(response.user.username);
   }, function(){
-    Auth.isSignedIn(false);
+      Auth.isSignedIn(false);
   })
 }
 
@@ -33,17 +35,11 @@ Auth.signUp = function(username, password){
     url: 'http://pet-shop.api.mks.io/signUp',
     data : data,
     "content-type": "application/json",
-    unwrapSuccess: function(response) {
-      Auth.signIn(username,password);
-      return response;
-    },
-    unwrapError: function(response) {
-      return response.error;
-    }
+  }).then(function(){
+    Auth.signIn(username,password);
   });
 }
 
-Auth.username = m.prop("");
-Auth.password = m.prop("");
 Auth.isSignedIn = m.prop(false);
 Auth.token = m.prop(null);
+Auth.username = m.prop(null);

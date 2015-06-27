@@ -6,23 +6,22 @@ var AuthPanel = module.exports = {}
 AuthPanel.controller = function(){
   var ctrl = this;
 
-  ctrl.setUsername = function(e){
-    Auth.username(this.value);
-  }
-
-  ctrl.setPassword = function(e){
-    Auth.password(this.value);
-  }
+  ctrl.username = m.prop("");
+  ctrl.password = m.prop("");
 
   ctrl.signUp = function(e){
     e.preventDefault();
-    Auth.signUp(Auth.username(), Auth.password())
+    Auth.signUp(ctrl.username(), ctrl.password()).then(function(){
+      ctrl.username('');
+      ctrl.password('');
+    })
   }
 
   ctrl.signIn = function(e){
     e.preventDefault();
-    Auth.signIn(Auth.username(), Auth.password()).then(function(){
-      console.log(Auth.isSignedIn());
+    Auth.signIn(ctrl.username(), ctrl.password()).then(function(){
+      ctrl.username("");
+      ctrl.password("");
     })
   }
 
@@ -35,14 +34,13 @@ AuthPanel.controller = function(){
 
 AuthPanel.view = function(ctrl){
   if (Auth.isSignedIn() === false){
-    // return signedInView(ctrl)
     var signInButton = m('button', {type:'submit', onclick: ctrl.signIn}, "Sign In");
     var signUpButton = m('button', {type:'submit', onclick: ctrl.signUp}, "Sign Up");
   }else{
-    // return signedOutView(ctrl)
     var signInButton = null;
     var signUpButton = null;
     var signOutButton = m('button', {type:'submit', onclick: ctrl.signOut}, "Sign Out");
+    var greeting = m('p', "Hi " + Auth.username() + '!');
   }
 
   //FORM
@@ -52,21 +50,23 @@ AuthPanel.view = function(ctrl){
     m('input', {
       type :"text",
       name: "username",
-      oninput: ctrl.setUsername
-      // m.withAttr("value", ctrl.setUsername)
+      value: ctrl.username(),
+      oninput: m.withAttr("value", ctrl.username)
     }),
 
     " Password:  ",
     m('input', {
       type: "text",
       name: "password",
-      oninput: ctrl.setPassword
-      // m.withAttr("value", ctrl.setPassword)
+      value: ctrl.password(),
+      oninput: m.withAttr("value", ctrl.password)
     }),
 
     //BUTTONS
     signInButton,
     signUpButton,
-    signOutButton
+    signOutButton,
+    greeting
   ])
+
 }

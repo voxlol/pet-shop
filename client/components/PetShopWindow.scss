@@ -7,9 +7,13 @@
   height: 320px;
   width: 200px;
   img {
-    height: auto;
+    max-height: auto;
     width: 200px;
   }
+}
+
+button {
+  padding-right: 5px;
 }
 
 .div {
