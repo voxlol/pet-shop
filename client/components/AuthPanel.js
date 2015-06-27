@@ -48,16 +48,47 @@ AuthPanel.controller = function(){
 }
 
 AuthPanel.view = function(ctrl){
-  if (Auth.isSignedIn() === false){
-    var signInButton = m('button', {type:'submit', onclick: ctrl.signIn}, "Sign In");
-    var signUpButton = m('button', {type:'submit', onclick: ctrl.signUp}, "Sign Up");
-    var createPetForm = null;
-  }else{
-    var signInButton = null;
-    var signUpButton = null;
-    var signOutButton = m('button', {type:'submit', onclick: ctrl.signOut}, "Sign Out");
-    var greeting = m('p', "Hi " + Auth.username() + '!');
-    var createPetForm = m('form', [
+  //FORM
+  return m('form', [
+    "User Name:  ",
+    m('input', {
+      type :"text",
+      name: "username",
+      value: ctrl.username(),
+      oninput: m.withAttr("value", ctrl.username)
+    }),
+
+    " Password:  ",
+    m('input', {
+      type: "text",
+      name: "password",
+      value: ctrl.password(),
+      oninput: m.withAttr("value", ctrl.password)
+    }),
+
+    // signout/signin view ternary
+    Auth.isSignedIn() ? signedInView(ctrl) : signedOutView(ctrl)
+  ])
+}
+
+signedOutView = function(ctrl){
+  var signInButton = m('button', {type:'submit', onclick: ctrl.signIn}, "Sign In");
+  var signUpButton = m('button', {type:'submit', onclick: ctrl.signUp}, "Sign Up");
+  return m('div', [
+    signInButton,
+    signUpButton,
+  ])
+}
+
+signedInView = function (ctrl) {
+  var signOutButton = m('button', {type:'submit', onclick: ctrl.signOut}, "Sign Out");
+  var greeting = m('p', "Hi " + Auth.username() + '!');
+
+  return m('div', [
+    signOutButton,
+    greeting,
+
+    m('form', [
       "Pet Name:  ",
       m('input', {
         type :"text",
@@ -85,35 +116,7 @@ AuthPanel.view = function(ctrl){
       }),
       m('br'),
 
-      m('button', {type:'submit', onclick: ctrl.petSubmit}, "Create a pet!")
+      m('button', {type:'submit', onclick: ctrl.petSubmit}, "Create a pet!"),
     ])
-  }
-
-  //FORM
-  return m('form', [
-
-    "User Name:  ",
-    m('input', {
-      type :"text",
-      name: "username",
-      value: ctrl.username(),
-      oninput: m.withAttr("value", ctrl.username)
-    }),
-
-    " Password:  ",
-    m('input', {
-      type: "text",
-      name: "password",
-      value: ctrl.password(),
-      oninput: m.withAttr("value", ctrl.password)
-    }),
-
-    //BUTTONS
-    signInButton,
-    signUpButton,
-    signOutButton,
-    greeting,
-    createPetForm
   ])
-
 }
