@@ -21,16 +21,16 @@ PetShopWindow.controller = function () {
         ctrl.pets().sort(sortFunction)
     });
 
-
   }, 5000);
 
-  ctrl.like = function(e,pet){
-    e.preventDefault();
+
+  ctrl.like = function(e,petId){
+    // e.preventDefault();
     var data = {
       apiToken : Auth.token()
     }
 
-    Shop.like(pet.id, data);
+    Shop.like(petId, data);
   }
 
   ctrl.sort = function(){
@@ -61,7 +61,7 @@ PetShopWindow.view = function (ctrl) {
 function petView (ctrl, pet){
   if (Auth.isSignedIn()) {
     var likedButton = m('button', {type:'submit', onclick: function(e){
-      ctrl.like(e,pet)
+      ctrl.like(e,pet.id)
     }}, "Like");
   }
 
