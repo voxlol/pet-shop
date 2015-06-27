@@ -83,7 +83,7 @@ For the basic requirements, you will only be working with pet shop `id=1`:
 
 ## Extra Credit:
 
-- [ ] Allow a signed-in user to add a new pet to the pet shop
+- [X] Allow a signed-in user to add a new pet to the pet shop
 - [ ] Let the user sort a shop's pets by number of likes
 - [ ] Allow the user to filter a shop's pets by species
 - [ ] Save these sorts and filters across refreshes via localStorage

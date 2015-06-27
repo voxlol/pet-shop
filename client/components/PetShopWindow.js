@@ -30,7 +30,6 @@ PetShopWindow.controller = function () {
 }
 
 PetShopWindow.view = function (ctrl) {
-
   return m('.pet-shop', [
     m('h1', "Welcome to " + ctrl.shop().name),
     ctrl.pets().map( petView.bind(null, ctrl) )
